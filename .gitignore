@@ -1,0 +1,26 @@
+﻿# Visual Studio privremeni fajlovi
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build fajlovi
+bin/
+obj/
+Debug/
+Release/
+
+# NuGet fajlovi
+*.nupkg
+packages/
+
+# Resursi koji se generišu
+*.log
+*.vsix
+*.cache
+*.dbmdl
+
+# Rešenje i konfiguracija
+*.VC.db
+*.VC.VC.opendb
