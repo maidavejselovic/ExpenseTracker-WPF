@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ExpenseTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid >
-        
+    <Grid Margin="10">
+        <Button Content="Add Expense" Width="120" Height="40" Click="Add_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

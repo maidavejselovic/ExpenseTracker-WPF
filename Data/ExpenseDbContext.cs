@@ -14,7 +14,7 @@ namespace ExpenseTracker.Data
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<ExpenseDbContext>());
         }
-
+         
         public DbSet<Expense> Expenses { get; set; }
     }
 }

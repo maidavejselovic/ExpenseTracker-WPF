@@ -12,17 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ExpenseTracker.Data;
+using ExpenseTracker.Models;
+using System.Collections.ObjectModel;
+using ExpenseTracker.Windows;
 
 namespace ExpenseTracker
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+       
         public MainWindow()
         {
             InitializeComponent();
+
         }
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddWindow addWindow = new AddWindow();
+            addWindow.ShowDialog();  
+        }
+
     }
 }
