@@ -62,24 +62,38 @@
                                 Width="80"/>
 
                 <!-- Dugmad -->
-                <DataGridTemplateColumn Header="Actions" Width="180">
+                <DataGridTemplateColumn Header="" Width="180">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
 
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <Button Content="Edit"
-                                Width="70"
-                                Margin="0,0,5,0"
-                                 />
+                               
+                                <Button Width="35"
+                                    Height="30"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+    
+                                    Cursor="Hand">
 
-                                <Button Content="Delete"
-                                Width="70"
-                                Background="#F44336"
-                                Foreground="White"
-                                BorderThickness="0"
-                                Padding="5"/>
-
+                                    <Image Source="/Icons/editicon.png"
+                                   Width="20"
+                                   Height="20"/>
+                                </Button>
+                                <Button Width="35"
+                                    Height="30"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Click="Delete_Click"
+                                    CommandParameter="{Binding}">
+                                    <!-- {Binding} znači da se prosleđuje trenutni Expense iz reda DataGrid-a. -->
+                                   
+                                    <Image Source="/Icons/delete-icon.png"
+                                       Width="20"
+                                       Height="20"/>
+                                </Button>
+                                
                             </StackPanel>
 
                         </DataTemplate>

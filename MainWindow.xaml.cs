@@ -41,5 +41,28 @@ namespace ExpenseTracker
                 Expenses.Add(expense);
             }
         }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as FrameworkElement;  //dugme na koje je klinuto sender pretvori u framework element
+            var expense = button.DataContext as Expense;  //uzmi expense objekat iz reda u kome je klinuto dugme
+
+            if (expense == null)
+                return;
+
+            MessageBoxResult result = MessageBox.Show(
+                "Are you sure you want to delete this expense?",
+                "Delete confirmation",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                db.Expenses.Remove(expense);
+                db.SaveChanges();
+
+                Expenses.Remove(expense);
+            }
+        }
     }
 }
