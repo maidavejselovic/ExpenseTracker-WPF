@@ -78,13 +78,18 @@ namespace ExpenseTracker
 
         private void PaidChanged(object sender, RoutedEventArgs e)
         {
-            var checkbox = sender as CheckBox;
+            var checkbox = sender as System.Windows.Controls.CheckBox;
             var expense = checkbox.DataContext as Expense;
 
             if (expense != null)
             {
-                db.Entry(expense).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                var dbExpense = db.Expenses.FirstOrDefault(x => x.Id == expense.Id);
+
+                if (dbExpense != null)
+                {
+                    dbExpense.IsPaid = checkbox.IsChecked == true;
+                    db.SaveChanges();
+                }
             }
         }
     }
