@@ -6,8 +6,89 @@
         xmlns:local="clr-namespace:ExpenseTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+
+        <Style x:Key="RightAlign" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+    </Window.Resources>
+
     <Grid Margin="10">
-        <Button Content="Add Expense" Width="120" Height="40" Click="Add_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Dugme -->
+        <Button Content="Add Expense"
+            Width="120"
+            Height="40"
+            Click="Add_Click"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"/>
+
+        <!-- Lista rashoda -->
+        <DataGrid Grid.Row="1"
+          ItemsSource="{Binding Expenses}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          Margin="0,10,0,0"
+          RowHeight="35"
+          BorderThickness="0"
+          GridLinesVisibility="None"
+          AlternatingRowBackground="#F7F7F7"
+          Background="White"
+          CanUserAddRows="False">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Description"
+                            Binding="{Binding Description}"
+                            Width="*"/>
+
+                <DataGridTextColumn Header="Amount"
+                            Binding="{Binding Amount}"
+                            Width="120"/>
+
+                <DataGridTextColumn Header="Date"
+                            Binding="{Binding ExpenseDate, StringFormat=d}"
+                            Width="150"/>
+
+                <DataGridCheckBoxColumn Header="Paid"
+                                Binding="{Binding IsPaid}"
+                                Width="80"/>
+
+                <!-- Dugmad -->
+                <DataGridTemplateColumn Header="Actions" Width="180">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <Button Content="Edit"
+                                Width="70"
+                                Margin="0,0,5,0"
+                                 />
+
+                                <Button Content="Delete"
+                                Width="70"
+                                Background="#F44336"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Padding="5"/>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
 
     </Grid>
 </Window>
