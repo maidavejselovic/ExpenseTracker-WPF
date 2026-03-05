@@ -39,7 +39,7 @@ namespace ExpenseTracker
             {
                 Expenses.Add(exp);
             }
-            UpdateTotal(); // ✔ da se total menja kad filtriraš
+           // UpdateTotal(); // da se total menja kad filtriraš
         }
 
         private void UpdateTotal()
@@ -95,7 +95,7 @@ namespace ExpenseTracker
                 db.Expenses.Remove(expense);
                 db.SaveChanges();
 
-                Expenses.Remove(expense);
+              // Expenses.Remove(expense); 
             }
             RefreshExpenses();
         }

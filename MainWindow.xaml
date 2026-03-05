@@ -15,7 +15,8 @@
         <TextBlock Text="Expense Tracker"
                    FontSize="26"
                    FontWeight="Bold"
-                   Margin="0,0,0,15"/>
+                   Margin="0,0,0,25"
+                   TextAlignment="Center"/>
 
         <!-- GORNJA TRAKA -->
         <Grid Grid.Row="1" Margin="0,0,0,10">
@@ -53,78 +54,109 @@
         <!-- TABELA -->
         <DataGrid Grid.Row="2"
                   ItemsSource="{Binding Expenses}"
+                  FontSize="13"
                   AutoGenerateColumns="False"
-                  RowHeight="35"
+                  RowHeight="30"
                   BorderThickness="0"
                   GridLinesVisibility="None"
                   AlternatingRowBackground="#F7F7F7"
                   Background="White"
                   CanUserAddRows="False">
-
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#2E7D32"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Height" Value="35"/>    <!-- povećana visina headera -->
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
 
+                
                 <DataGridTextColumn Header="Description"
-                                    Binding="{Binding Description}"
-                                    Width="*"/>
+                    Binding="{Binding Description}"
+                    Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="Margin" Value="5,0,0,0"/>
+                            <!-- malo prostora sa leve strane -->
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
 
                 <DataGridTextColumn Header="Amount"
-                                    Binding="{Binding Amount}"
-                                    Width="120"/>
+                        Binding="{Binding Amount}"
+                        Width="120">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="Margin" Value="0,0,5,0"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
 
                 <DataGridTextColumn Header="Date"
-                                    Binding="{Binding ExpenseDate, StringFormat=d}"
-                                    Width="150"/>
+                        Binding="{Binding ExpenseDate, StringFormat=d}"
+                        Width="150">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="Margin" Value="5,0,0,0"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
 
+                <!-- Paid (CheckBox): centrirano -->
                 <DataGridTemplateColumn Header="Paid" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding IsPaid}"
-                                      Checked="PaidChanged"
-                                      Unchecked="PaidChanged"
-                                      HorizontalAlignment="Center"/>
+                          Checked="PaidChanged"
+                          Unchecked="PaidChanged"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <!-- Edit + Delete -->
+                <!-- Edit + Delete: centrirano -->
                 <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-
-                                <Button Width="35"
-                                        Height="30"
-                                        Background="Transparent"
-                                        BorderThickness="0"
-                                        Cursor="Hand"
-                                        Click="Edit_Click">
-
+                                <Button Background="Transparent"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Click="Edit_Click">
                                     <Image Source="/Icons/editicon.png"
-                                           Width="18"
-                                           Height="18"/>
+                                       Width="18"
+                                       Height="18"/>
                                 </Button>
 
                                 <Button Width="35"
-                                        Height="30"
-                                        Background="Transparent"
-                                        BorderThickness="0"
-                                        Cursor="Hand"
-                                        Click="Delete_Click">
-
+                                    Height="30"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Click="Delete_Click">
                                     <Image Source="/Icons/delete-icon.png"
-                                           Width="18"
-                                           Height="18"/>
+                                       Width="18"
+                                       Height="18"/>
                                 </Button>
-
                             </StackPanel>
-
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
             </DataGrid.Columns>
-
         </DataGrid>
 
     </Grid>
