@@ -34,7 +34,6 @@
         <DataGrid Grid.Row="1"
           ItemsSource="{Binding Expenses}"
           AutoGenerateColumns="False"
-          IsReadOnly="True"
           Margin="0,10,0,0"
           RowHeight="35"
           BorderThickness="0"
@@ -57,9 +56,16 @@
                             Binding="{Binding ExpenseDate, StringFormat=d}"
                             Width="150"/>
 
-                <DataGridCheckBoxColumn Header="Paid"
-                                Binding="{Binding IsPaid}"
-                                Width="80"/>
+                <DataGridTemplateColumn Header="Paid" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsPaid}"
+                              Checked="PaidChanged"
+                              Unchecked="PaidChanged"
+                              HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
                 <!-- Dugmad -->
                 <DataGridTemplateColumn Header="" Width="180">
@@ -73,8 +79,8 @@
                                     Height="30"
                                     Background="Transparent"
                                     BorderThickness="0"
-    
-                                    Cursor="Hand">
+                                    Cursor="Hand"
+                                    Click="Edit_Click">
 
                                     <Image Source="/Icons/editicon.png"
                                    Width="20"

@@ -4,6 +4,7 @@ using ExpenseTracker.Windows;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ExpenseTracker
 {
@@ -41,6 +42,16 @@ namespace ExpenseTracker
                 Expenses.Add(expense);
             }
         }
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as FrameworkElement;
+            var expense = button.DataContext as Expense;
+
+            EditWindow window = new EditWindow(expense);
+            window.ShowDialog();
+
+            RefreshExpenses();
+        }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
@@ -62,6 +73,18 @@ namespace ExpenseTracker
                 db.SaveChanges();
 
                 Expenses.Remove(expense);
+            }
+        }
+
+        private void PaidChanged(object sender, RoutedEventArgs e)
+        {
+            var checkbox = sender as CheckBox;
+            var expense = checkbox.DataContext as Expense;
+
+            if (expense != null)
+            {
+                db.Entry(expense).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
             }
         }
     }
