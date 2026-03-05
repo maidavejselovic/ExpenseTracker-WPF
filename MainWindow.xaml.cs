@@ -23,16 +23,29 @@ namespace ExpenseTracker
             Expenses = new ObservableCollection<Expense>(db.Expenses.ToList());
 
             DataContext = this;
-        }
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            AddWindow addWindow = new AddWindow();
-            addWindow.ShowDialog();
-
             RefreshExpenses();
         }
+        private void Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var text = (sender as TextBox).Text.ToLower();
 
+            var filtered = db.Expenses
+                .Where(x => x.Description.ToLower().Contains(text))
+                .ToList();
+
+            Expenses.Clear();
+
+            foreach (var exp in filtered)
+            {
+                Expenses.Add(exp);
+            }
+            UpdateTotal(); // ✔ da se total menja kad filtriraš
+        }
+
+        private void UpdateTotal()
+        {
+            txtTotal.Text = "Total: " + Expenses.Sum(x => x.Amount) + " €";
+        }
         private void RefreshExpenses()
         {
             Expenses.Clear();
@@ -41,7 +54,17 @@ namespace ExpenseTracker
             {
                 Expenses.Add(expense);
             }
+
+            UpdateTotal();
         }
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddWindow addWindow = new AddWindow();
+            addWindow.ShowDialog();
+
+            RefreshExpenses();
+        }
+
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as FrameworkElement;
@@ -74,6 +97,7 @@ namespace ExpenseTracker
 
                 Expenses.Remove(expense);
             }
+            RefreshExpenses();
         }
 
         private void PaidChanged(object sender, RoutedEventArgs e)
