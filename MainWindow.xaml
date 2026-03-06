@@ -11,41 +11,66 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- NASLOV -->
-        <TextBlock Text="Expense Tracker"
-                   FontSize="26"
-                   FontWeight="Bold"
-                   Margin="0,0,0,25"
-                   TextAlignment="Center"/>
+        <!-- NASLOV + add dugme -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <!-- GORNJA TRAKA -->
+            <!-- Naslov -->
+            <TextBlock Text="Expense Tracker"
+               FontSize="26"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+
+            <!-- Add dugme -->
+            <Button Grid.Column="1"
+            Content="+"
+            Width="35"
+            Height="35"
+            FontSize="18"
+            FontWeight="Bold"
+            Background="#2E7D32"
+            Foreground="White"
+            BorderThickness="0"
+            Cursor="Hand"
+            Click="Add_Click"/>
+        </Grid>
+        <!--  SEARCH + TOTAL -->
         <Grid Grid.Row="1" Margin="0,0,0,10">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="Auto"/>
+                <!-- Search -->
                 <ColumnDefinition Width="*"/>
+                <!-- prazno - gura Total desno -->
+                <ColumnDefinition Width="Auto"/>
+                <!-- Total -->
             </Grid.ColumnDefinitions>
 
-            <!-- Search -->
-            <TextBox Width="180"
-                     Height="30"
-                     VerticalAlignment="Center"
-                     TextChanged="Search_TextChanged"
-                     ToolTip="Search expenses"/>
+           
 
-            <!-- Add dugme -->
-            <Button Content="Add Expense"
-                    Grid.Column="1"
-                    Width="120"
-                    Height="30"
-                    Margin="10,0"
-                    Click="Add_Click"/>
+            <!-- SEARCH -->
+            <StackPanel Grid.Column="0"
+            Orientation="Horizontal"
+            VerticalAlignment="Center">
 
-            <!-- Total -->
+                <TextBlock Text="Search"
+               VerticalAlignment="Center"
+               Margin="0,0,8,0"/>
+
+                <TextBox x:Name="SearchBox"
+             Width="180"
+             Height="30"
+             VerticalAlignment="Center"
+             TextChanged="Search_TextChanged"/>
+
+            </StackPanel>
+
+            <!-- TOTAL -->
             <TextBlock x:Name="txtTotal"
                        Grid.Column="2"
-                       HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        FontSize="16"
                        FontWeight="Bold"/>
@@ -61,7 +86,8 @@
                   GridLinesVisibility="None"
                   AlternatingRowBackground="#F7F7F7"
                   Background="White"
-                  CanUserAddRows="False">
+                  CanUserAddRows="False"
+                  HeadersVisibility="Column">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="#2E7D32"/>
@@ -69,14 +95,17 @@
                     <Setter Property="FontWeight" Value="Bold"/>
                     <Setter Property="HorizontalContentAlignment" Value="Left"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
-                    <Setter Property="Height" Value="35"/>    <!-- povećana visina headera -->
+                    <Setter Property="Height" Value="35"/>
+                    <!-- povećana visina headera -->
                     <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="BorderBrush" Value="Gray"/>
+                    <Setter Property="BorderThickness" Value="0,0,2,2"/>
                     <Setter Property="Padding" Value="5"/>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
 
-                
+
                 <DataGridTextColumn Header="Description"
                     Binding="{Binding Description}"
                     Width="*">
@@ -128,7 +157,7 @@
                 </DataGridTemplateColumn>
 
                 <!-- Edit + Delete: centrirano -->
-                <DataGridTemplateColumn Width="120">
+                <DataGridTemplateColumn Header="Actions" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -136,7 +165,7 @@
                                     BorderThickness="0"
                                     Cursor="Hand"
                                     Click="Edit_Click">
-                                    <Image Source="/Icons/editicon.png"
+                                    <Image Source="/Icons/edit-icon.png"
                                        Width="18"
                                        Height="18"/>
                                 </Button>
