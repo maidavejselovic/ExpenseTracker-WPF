@@ -11,7 +11,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- NASLOV + add dugme -->
+        <!-- Naslov + add dugme -->
         <Grid Grid.Row="0" Margin="0,0,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -37,7 +37,7 @@
             Cursor="Hand"
             Click="Add_Click"/>
         </Grid>
-        <!--  SEARCH + TOTAL -->
+        <!--  Search + total -->
         <Grid Grid.Row="1" Margin="0,0,0,10">
 
             <Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
 
            
 
-            <!-- SEARCH -->
+            <!-- Search -->
             <StackPanel Grid.Column="0"
             Orientation="Horizontal"
             VerticalAlignment="Center">
@@ -64,19 +64,19 @@
              Width="180"
              Height="30"
              VerticalAlignment="Center"
-             TextChanged="Search_TextChanged"/>
+             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
             </StackPanel>
 
-            <!-- TOTAL -->
-            <TextBlock x:Name="txtTotal"
+            <!-- Total -->
+            <TextBlock Text="{Binding Total}"
                        Grid.Column="2"
                        VerticalAlignment="Center"
                        FontSize="16"
                        FontWeight="Bold"/>
         </Grid>
 
-        <!-- TABELA -->
+        <!-- Tabela -->
         <DataGrid Grid.Row="2"
                   ItemsSource="{Binding Expenses}"
                   FontSize="13"
@@ -121,7 +121,7 @@
                 </DataGridTextColumn>
 
                 <DataGridTextColumn Header="Amount"
-                        Binding="{Binding Amount}"
+                         Binding="{Binding Amount, StringFormat=0}"
                         Width="120">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
@@ -149,8 +149,8 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding IsPaid}"
-                          Checked="PaidChanged"
-                          Unchecked="PaidChanged"
+                          Command="{Binding DataContext.TogglePaidCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                          CommandParameter="{Binding}"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"/>
                         </DataTemplate>
@@ -165,7 +165,8 @@
                                 <Button Background="Transparent"
                                     BorderThickness="0"
                                     Cursor="Hand"
-                                    Click="Edit_Click">
+                                    Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CommandParameter="{Binding}">
                                     <Image Source="/Icons/edit-icon.png"
                                        Width="18"
                                        Height="18"/>
@@ -176,7 +177,8 @@
                                     Background="Transparent"
                                     BorderThickness="0"
                                     Cursor="Hand"
-                                    Click="Delete_Click">
+                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CommandParameter="{Binding}">
                                     <Image Source="/Icons/delete-icon.png"
                                        Width="18"
                                        Height="18"/>
