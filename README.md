@@ -1,4 +1,4 @@
-﻿# ExpenseTracker - opis projekta
+﻿# ExpenseTracker - WPF
 
 Ovo je jednostavna WPF desktop aplikacija za evidenciju rashoda.
 Omogućava pregled, dodavanje, izmenu i brisanje rashoda, kao i praćenje statusa plaćenosti i ukupnog iznosa.
@@ -20,13 +20,14 @@ To znači da bazu nije potrebno praviti ručno – prilikom prvog pokretanja pro
 ### **Tehnički detalji:**
 - **Data Binding**: koristi se za povezivanje UI elemenata sa ViewModel-ima.
 - **ObservableCollection**: koristi se u MainWindowViewModel za listu rashoda.
-- **ICommand**: koristi se za dugmad (Save, Edit, Delete).
+- **ICommand**: koristi se za dugmad.
 - **Validacija**: dugme Save je onemogućeno dok obavezna polja nisu popunjena.
 
 ### **Pokretanje aplikacije:**
-1. Kloniraj ili preuzmi projekat sa GitHub-a.
-2. Otvoriti Visual Studio.
-O3. tvoriti solution ExpenseTracker.sln.
+1. Klonirajte ili preuzmite projekat sa GitHub-a.
+2. Otvorite Visual Studio.
+3. Otvorite solution ExpenseTracker.sln.
 4. (Opcionalno) Ako koristite MySQL, proverite konekciju u App.config.
-5. Pokrenuti aplikaciju (F5).
+5. Pokrenite aplikaciju (F5).
+
 Prilikom prvog pokretanja, baza i tabela Expenses će se automatski kreirati zahvaljujući Code First pristupu.
