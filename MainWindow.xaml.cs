@@ -60,6 +60,8 @@ namespace ExpenseTracker
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             AddWindow addWindow = new AddWindow();
+            addWindow.Owner = this;                          // Centriraj u odnosu na ovaj prozor
+            addWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             addWindow.ShowDialog();
 
             RefreshExpenses();
@@ -70,8 +72,10 @@ namespace ExpenseTracker
             var button = sender as FrameworkElement;
             var expense = button.DataContext as Expense;
 
-            EditWindow window = new EditWindow(expense);
-            window.ShowDialog();
+            EditWindow editWindow = new EditWindow(expense);
+            editWindow.Owner = this;                          // Centriraj u odnosu na ovaj prozor
+            editWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            editWindow.ShowDialog();
 
             RefreshExpenses();
         }

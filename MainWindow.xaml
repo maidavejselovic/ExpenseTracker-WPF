@@ -81,6 +81,7 @@
                   ItemsSource="{Binding Expenses}"
                   FontSize="13"
                   AutoGenerateColumns="False"
+                  Margin="0 15 0 0"
                   RowHeight="30"
                   BorderThickness="0"
                   GridLinesVisibility="None"
