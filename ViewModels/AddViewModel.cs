@@ -54,6 +54,9 @@ namespace ExpenseTracker.ViewModels
 
         public AddViewModel()
         {
+            // Vezuje dugme Save sa metodama:
+            // SaveExpense - šta dugme radi kada se klikne
+            // CanSave - kada dugme može biti aktivno (enabled/disabled)
             SaveCommand = new RelayCommand<Window>(SaveExpense, CanSave);
         }
 

@@ -17,7 +17,6 @@ namespace ExpenseTracker
 
             var vm = new MainWindowViewModel();
             DataContext = vm;
-
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {

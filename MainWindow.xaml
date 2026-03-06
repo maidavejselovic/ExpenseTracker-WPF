@@ -11,69 +11,66 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Naslov + add dugme -->
+        <!-- Title + add button -->
         <Grid Grid.Row="0" Margin="0,0,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <!-- Naslov -->
+            <!-- Title -->
             <TextBlock Text="Expense Tracker"
                FontSize="26"
                FontWeight="Bold"
                VerticalAlignment="Center"/>
 
-            <!-- Add dugme -->
+            <!-- Add button -->
             <Button Grid.Column="1"
-            Content="+"
-            Width="35"
-            Height="35"
-            FontSize="18"
-            FontWeight="Bold"
-            Background="#2E7D32"
-            Foreground="White"
-            BorderThickness="0"
-            Cursor="Hand"
-            Click="Add_Click"/>
+                Content="+"
+                Width="35"
+                Height="35"
+                FontSize="18"
+                FontWeight="Bold"
+                Background="#2E7D32"
+                Foreground="White"
+                BorderThickness="0"
+                Cursor="Hand"
+                Click="Add_Click"/>
         </Grid>
         <!--  Search + total -->
         <Grid Grid.Row="1" Margin="0,0,0,10">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <!-- Search -->
-                <ColumnDefinition Width="*"/>
-                <!-- prazno - gura Total desno -->
                 <ColumnDefinition Width="Auto"/>
+                <!-- prazno -  gura total desno -->
+                <ColumnDefinition Width="*"/>
                 <!-- Total -->
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
-           
 
             <!-- Search -->
             <StackPanel Grid.Column="0"
-            Orientation="Horizontal"
-            VerticalAlignment="Center">
+                Orientation="Horizontal"
+                VerticalAlignment="Center">
 
                 <TextBlock Text="Search"
-               VerticalAlignment="Center"
-               Margin="0,0,8,0"/>
+                   VerticalAlignment="Center"
+                   Margin="0,0,8,0"/>
 
                 <TextBox x:Name="SearchBox"
-             Width="180"
-             Height="30"
-             VerticalAlignment="Center"
-             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
-
+                    Width="180"
+                    Height="30"
+                    VerticalAlignment="Center"
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <!-- Total -->
             <TextBlock Text="{Binding Total}"
-                       Grid.Column="2"
-                       VerticalAlignment="Center"
-                       FontSize="16"
-                       FontWeight="Bold"/>
+                    Grid.Column="2"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"/>
         </Grid>
 
         <!-- Tabela -->
@@ -97,16 +94,14 @@
                     <Setter Property="HorizontalContentAlignment" Value="Left"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="Height" Value="35"/>
-                    <!-- povećana visina headera -->
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="BorderBrush" Value="Gray"/>
                     <Setter Property="BorderThickness" Value="0,0,2,2"/>
                     <Setter Property="Padding" Value="5"/>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
+
             <DataGrid.Columns>
-
-
                 <DataGridTextColumn Header="Description"
                     Binding="{Binding Description}"
                     Width="*">
@@ -115,7 +110,6 @@
                             <Setter Property="VerticalAlignment" Value="Center"/>
                             <Setter Property="HorizontalAlignment" Value="Left"/>
                             <Setter Property="Margin" Value="5,0,0,0"/>
-                            <!-- malo prostora sa leve strane -->
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -144,20 +138,20 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <!-- Paid (CheckBox): centrirano -->
+                <!-- Paid (checkBox) -->
                 <DataGridTemplateColumn Header="Paid" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsPaid}"
-                          Command="{Binding DataContext.TogglePaidCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                          CommandParameter="{Binding}"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding IsPaid, Mode=TwoWay}"
+                      Command="{Binding DataContext.TogglePaidCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                      CommandParameter="{Binding}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <!-- Edit + Delete: centrirano -->
+                <!-- Edit + delete -->
                 <DataGridTemplateColumn Header="Actions" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -187,9 +181,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
 </Window>

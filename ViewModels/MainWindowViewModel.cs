@@ -31,20 +31,19 @@ namespace ExpenseTracker.ViewModels
         public string Total => $"Total: {Expenses.Sum(x => x.Amount)} €";
 
         // ICommand dugmad
-       // public ICommand AddCommand { get; }
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
+        public ICommand TogglePaidCommand { get; } // NOVO
 
         public MainWindowViewModel()
         {
             db = new ExpenseDbContext();
             Expenses = new ObservableCollection<Expense>(db.Expenses.ToList());
 
-            //AddCommand = new RelayCommand<object>(OpenAddWindow);
             EditCommand = new RelayCommand<Expense>(EditExpense);
             DeleteCommand = new RelayCommand<Expense>(DeleteExpense);
+            TogglePaidCommand = new RelayCommand<Expense>(TogglePaid); // NOVO
         }
-
 
         private void EditExpense(Expense expense)
         {
@@ -74,6 +73,21 @@ namespace ExpenseTracker.ViewModels
                 db.SaveChanges();
                 RefreshExpenses();
             }
+        }
+
+        private void TogglePaid(Expense expense) // NOVO
+        {
+            if (expense == null) return;
+
+            // Promeni status
+            expense.IsPaid = !expense.IsPaid;
+
+            // Update u bazi
+            db.Entry(expense).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            // Osvježi ukupan iznos
+            OnPropertyChanged(nameof(Total));
         }
 
         private void FilterExpenses()
